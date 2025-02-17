@@ -1,4 +1,5 @@
 import tkinter as tk
+import SOSBoard
 
 def BoardSizeValidation(S):
     try: 
@@ -38,7 +39,7 @@ BoardText  = tk.Label(TopFrame,text="Board size",anchor="e", justify="right")
 BoardText.grid(row=0,column=3,sticky="e",padx=(80,2),pady=2)
 
 Boardsize = tk.IntVar()
-Boardsize.set('8')
+Boardsize.set(8)
 reg = TopFrame.register(BoardSizeValidation(Boardsize))
 BoardSizeBox = tk.Entry(TopFrame,textvariable=Boardsize,width=2)
 BoardSizeBox.grid(row=0,column=4,sticky="e",padx=5,pady=5)
@@ -98,4 +99,9 @@ OPlayerR2 = tk.Radiobutton(RightFrame, text='O', value='Blue', variable=SPlayer,
 SPlayerR2.grid(row=3,column=0,padx=(4,2),pady=2)
 OPlayerR2.grid(row=4,column=0,padx=(4,2),pady=2)
 
-window.mainloop()
+print('\nInitializing simple ',Boardsize.get(),' x ', Boardsize.get())
+gameBoard = SOSBoard.SOSBoard(Boardsize.get(), GameType.get())
+gameBoard.printBoard()
+print('Game Score( Red: ',gameBoard.getRedScore(),', Blue: ',gameBoard.getBlueScore(), ' )')
+
+#window.mainloop()
