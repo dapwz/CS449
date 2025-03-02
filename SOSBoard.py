@@ -24,47 +24,50 @@ class SOSBoard:
         return self.redScore
 
     def getPlace(self, X, Y):
-        if 0<=X<=(self.boardSize)  and 0<=Y<=(self.boardSize):
+        if 0 <= X <= (self.boardSize) and 0 <= Y <= (self.boardSize):
             return self.boardArray[X-1][Y-1]
         else:
             return ' '
 
     def checkWin(self, player, moveX, moveY):
-        if self.getPlace(moveX,moveY) == 'O': # if O is placed, check for S in all 4 directions (vertical, horizontal, diagonal x2)
-            for x in range(moveX-1, moveX+1): #loop through one side (horizontal and diagonal x2)
+        # if O is placed, check for S in all 4 directions (vertical, horizontal, diagonal x2)
+        if self.getPlace(moveX, moveY) == 'O':
+            # loop through one side (horizontal and diagonal x2)
+            for x in range(moveX-1, moveX+1):
                 if self.getPlace(x, moveY) == 'S':
-                        if self.getPlace(moveX+(moveX-x),moveY) == 'S':
-                            # win state?
-                            if player == 'Blue':
-                                self.blueScore += 1
-                            else:
-                                self.redScore += 1
+                    if self.getPlace(moveX+(moveX-x), moveY) == 'S':
+                        # win state?
+                        if player == 'Blue':
+                            self.blueScore += 1
+                        else:
+                            self.redScore += 1
 
-            if self.getPlace(moveX, moveY+1) == 'S': #check vertical
-                        if self.getPlace(moveX,moveY-1) == 'S':
-                            # win state?
-                            if player == 'Blue':
-                                self.blueScore += 1
-                            else:
-                                self.redScore += 1
+            if self.getPlace(moveX, moveY+1) == 'S':  # check vertical
+                if self.getPlace(moveX, moveY-1) == 'S':
+                    # win state?
+                    if player == 'Blue':
+                        self.blueScore += 1
+                    else:
+                        self.redScore += 1
 
-        if self.getPlace(moveX,moveY) == 'S': #check all 8 directions
+        if self.getPlace(moveX, moveY) == 'S':  # check all 8 directions
             for x in range(moveX-1, moveX+2):
                 for y in range(moveY-1, moveY+2):
                     if (x != moveX or y != moveY) and self.getPlace(x, y) == 'O':
-                        if self.getPlace(x+(x-moveX),y+(y-moveY)) == 'S':
+                        if self.getPlace(x+(x-moveX), y+(y-moveY)) == 'S':
                             # win state?
                             if player == 'Blue':
                                 self.blueScore += 1
                             else:
-                                self.redScore += 1                        
-                        
-        if self.gameType == 'Simple' and (self.blueScore > 0 or self.redScore > 0): # simple win state = blue or red score over 0
+                                self.redScore += 1
+
+        # simple win state = blue or red score over 0
+        if self.gameType == 'Simple' and (self.blueScore > 0 or self.redScore > 0):
             return True
 
-        if self.gameType == 'General' and self.emptySpaces == 0: #general win state = no remaining spaces
+        if self.gameType == 'General' and self.emptySpaces == 0:  # general win state = no remaining spaces
             return True
-        
+
         return False
 
     def makeMove(self, player, letter, moveX, moveY):
@@ -75,8 +78,8 @@ class SOSBoard:
         else:
             self.boardArray[arrayX][arrayY] = letter
             self.emptySpaces -= 1
-            #print(player,' setting ', letter, ' @ ',moveX,',',moveY)
+            # print(player,' setting ', letter, ' @ ',moveX,',',moveY)
             return self.checkWin(player, moveX, moveY)
 
-    def setTurn(self,color):
+    def setTurn(self, color):
         self.Turn = color
