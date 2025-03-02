@@ -6,6 +6,7 @@ class SOSBoard:
         self.blueScore = 0
         self.redScore = 0
         self.boardArray = [[" "]*boardSize for i in range(boardSize)]
+        self.turn = 'Blue'
 
     def printBoard(self):
         print('Printing ', self.boardSize,
@@ -58,9 +59,6 @@ class SOSBoard:
                             else:
                                 self.redScore += 1                        
                         
-
-                
-
         if self.gameType == 'Simple' and (self.blueScore > 0 or self.redScore > 0): # simple win state = blue or red score over 0
             return True
 
@@ -79,3 +77,6 @@ class SOSBoard:
             self.emptySpaces -= 1
             #print(player,' setting ', letter, ' @ ',moveX,',',moveY)
             return self.checkWin(player, moveX, moveY)
+
+    def setTurn(self,color):
+        self.Turn = color

@@ -2,6 +2,13 @@ import tkinter as tk
 import SOSBoard
 import SOSPlayer
 
+#initialize players
+global BluePlayer,RedPlayer,TurnPlayer, Board, gameBoard, CenterFrame
+BluePlayer = SOSPlayer.SOSPlayer('Blue','Human','S')
+RedPlayer = SOSPlayer.SOSPlayer('Red','Human','S')
+TurnPlayer = BluePlayer
+TurnColor = "Blue"
+
 def BoardSizeValidation(S):
     try:
         if (2 > S > 17):
@@ -12,23 +19,50 @@ def BoardSizeValidation(S):
     except:
         return False
 
-def on_button_click(gameBoard,btn,x,y,Player):
-    print(f"Updating button at ({x}, {y}) with letter: {Player.getLetter()} by {Player.getColor()}")
+def on_button_click(btn,x,y):
+    global BluePlayer,RedPlayer,TurnPlayer,gameBoard, TurnText
+    print(f"Updating button at ({x}, {y}) with letter: {TurnPlayer.getLetter()} by {TurnPlayer.getColor()}")
     if gameBoard.getPlace(x,y)==" ":
-        btn.config(text=Player.getLetter())
-        result = gameBoard.makeMove(Player.getColor(), Player.getLetter(), x, y)
-        if result == False:
-            if Player.getColor() == 'Blue':
-                Player = RedPlayer
-            else:
-                Player = BluePlayer
-            TurnText.config(CenterFrame, text=f"Current turn: {Player.getColor()}")
-
+        btn.config(text=TurnPlayer.getLetter())
+        result = gameBoard.makeMove(TurnPlayer.getColor(), TurnPlayer.getLetter(), x, y)
+        if result == True:
+            print(f"[Blue:{gameBoard.getBlueScore()}|Red:{gameBoard.getRedScore()}] - {TurnPlayer.getColor()} Player Wins!")
+            exit()
         else:
-            print(f"{Player.getLetter()} Player Wins!")
-            exit
+            if TurnPlayer.getColor() == 'Blue':
+                TurnPlayer = RedPlayer
+                TurnText.config(text="Current turn: Red")
+            else:
+                TurnPlayer = BluePlayer
+                TurnText.config(text="Current turn: Blue",)
 
+def StartNewGame(size,type):
+    global Board, gameBoard, TurnPlayer, CenterFrame
+    print('\nInitializing ',type,' ', size, ' x ', size)
+    Board =  [[[] for _ in range(size)] for _ in range(size)]
+    for widget in CenterFrame.winfo_children():
+        widget.destroy()
 
+    gameBoard = SOSBoard.SOSBoard(size, type)   
+    TurnPlayer=BluePlayer
+    
+    for row in range(size):
+        for col in range(size):
+            btn = tk.Button(
+                CenterFrame,
+                text=" ",
+                width=1,
+                height=1,
+                background="White"
+            )
+            btn.bind('<Button-1>', lambda event, 
+                    btn=btn,row=row, col=col, 
+                    : on_button_click(btn, row, col))
+            btn.grid(row=row, column=col, padx=(1, 0), ipadx=4, ipady=1, sticky="NWSE")
+            Board[row][col] = btn
+    TurnText = tk.Label(CenterFrame, text="Current turn: Blue")
+    TurnText.grid(row=Boardsize.get()+1, columnspan=Boardsize.get(), column=0, sticky="S", padx=2, pady=(10, 5))
+    return gameBoard
 
 # top row frame, equal left and right frames, gameboard center frame
 window = tk.Tk()
@@ -48,7 +82,7 @@ SOSText = tk.Label(TopFrame, text="SOS", anchor="w", padx=2, pady=2)
 SOSText.grid(row=0, column=0)
 
 GameType = tk.StringVar()
-GameType.set('General')
+GameType.set('Simple')
 GameR1 = tk.Radiobutton(TopFrame, text='Simple game', value='Simple', variable=GameType, justify="left")
 GameR2 = tk.Radiobutton(TopFrame, text='General Game', value='General', variable=GameType, justify="left")
 GameR1.grid(row=0, column=1, padx=2, pady=2)
@@ -64,27 +98,17 @@ reg = TopFrame.register(BoardSizeValidation(Boardsize.get()))
 BoardSizeBox = tk.Entry(TopFrame, textvariable=Boardsize, width=2)
 BoardSizeBox.grid(row=0, column=4, sticky="e", padx=5, pady=5)
 
-print('\nInitializing simple ', Boardsize.get(), ' x ', Boardsize.get())
-gameBoard = SOSBoard.SOSBoard(Boardsize.get(), GameType.get())
+#print('\nInitializing simple ', Boardsize.get(), ' x ', Boardsize.get())
 
-#initialize players
-TurnColor = "Blue"
+gameBoard = StartNewGame(Boardsize.get(), GameType.get())
 
+
+### left frame - blue player label, human/computer radio buttons, S/O radio buttons
 BlueLetter = tk.StringVar()
 BlueLetter.set('S')
 BlueType = tk.StringVar()
 BlueType.set('Human')
-BluePlayer = SOSPlayer.SOSPlayer("Blue",BlueType.get(),BlueLetter.get())
 
-RedType = tk.StringVar()
-RedType.set('Human')
-RedLetter = tk.StringVar()
-RedLetter.set('S')
-RedPlayer = SOSPlayer.SOSPlayer("Red",RedType.get(),RedLetter.get())
-
-TurnPlayer = BluePlayer
-
-### left frame - blue player label, human/computer radio buttons, S/O radio buttons
 BlueText = tk.Label(LeftFrame, text="Blue player")
 BlueText.grid(row=1, column=0, sticky="w", padx=2, pady=5)
 
@@ -109,6 +133,11 @@ RecordCheckButton = tk.Checkbutton(LeftFrame, text='Record Game', state='disable
 RecordCheckButton.grid(row=6, column=0, padx=5, pady=((Boardsize.get()*10+5), 5), sticky="s")
 
 ### right frame - red player label, human/computer radio buttons, S/O radio buttons
+RedType = tk.StringVar()
+RedType.set('Human')
+RedLetter = tk.StringVar()
+RedLetter.set('S')
+
 RedText = tk.Label(RightFrame, text="Red player", justify="left")
 RedText.grid(row=1, column=0, sticky="e", padx=2, pady=5)
 
@@ -128,27 +157,14 @@ RedPlayerR2 = tk.Radiobutton(RightFrame, text='O', value='O', variable=RedLetter
 RedPlayerR2.bind('<Button-1>', lambda event: RedPlayer.setLetter('O'))
 RedPlayerR2.grid(row=4, column=0, padx=(4, 2), pady=2)
 
-### gameboard - grid of buttons, updated when new game clicked
-Board =  [[[] for _ in range(Boardsize.get())] for _ in range(Boardsize.get())]
-
-for row in range(Boardsize.get()):
-    for col in range(Boardsize.get()):
-        btn = tk.Button(
-            CenterFrame,
-            text=" ",
+NewGame = tk.Button(
+            RightFrame,
+            text="New Game",
             width=1,
             height=1,
             background="White"
         )
-        btn.bind('<Button-1>', lambda event, 
-                 gameBoard=gameBoard, btn=btn, 
-                 row=row, col=col, 
-                 Player=TurnPlayer: on_button_click(gameBoard, btn, row, col, Player))
-        
-        btn.grid(row=row, column=col, padx=(1, 0), ipadx=4, ipady=1, sticky="NWSE")
-        Board[row][col] = btn
-
-TurnText = tk.Label(CenterFrame, text="Current turn: Blue")
-TurnText.grid(row=Boardsize.get()+1, columnspan=Boardsize.get(), column=0, sticky="s", padx=2, pady=(10, 5))
+NewGame.bind('<Button-1>',lambda event:StartNewGame(Boardsize.get(), GameType.get()))        
+NewGame.grid(row=8, column=0, padx=(1, 0), ipadx=4, ipady=10, sticky="NWSE")
 
 window.mainloop()
