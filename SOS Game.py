@@ -30,8 +30,14 @@ def on_button_click(btn, x, y):
         result = gameBoard.makeMove(
             TurnPlayer.getColor(), TurnPlayer.getLetter(), x, y)
         if result == True:
+            if gameBoard.getBlueScore() > gameBoard.getRedScore():
+                Winner = 'Blue Player Wins!'
+            elif(gameBoard.getBlueScore() < gameBoard.getRedScore()):
+                Winner = 'Red Player Wins!'
+            else:
+                Winner = 'Tie Game.'
             print(
-                f"[Blue:{gameBoard.getBlueScore()}|Red:{gameBoard.getRedScore()}] - {TurnPlayer.getColor()} Player Wins!")
+                f"[Blue:{gameBoard.getBlueScore()}|Red:{gameBoard.getRedScore()}] - {Winner}")
             exit()
         else:
             if TurnPlayer.getColor() == 'Blue':
@@ -43,7 +49,7 @@ def on_button_click(btn, x, y):
 
 
 def StartNewGame(size, type):
-    global Board, gameBoard, TurnPlayer, CenterFrame
+    global Board, gameBoard, TurnPlayer, CenterFrame, TurnText
     print('\nInitializing ', type, ' ', size, ' x ', size)
     Board = [[[] for _ in range(size)] for _ in range(size)]
     for widget in CenterFrame.winfo_children():
