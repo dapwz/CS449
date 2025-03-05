@@ -1,6 +1,9 @@
 class SOSBoard:
     def __init__(self, boardSize, gameType):
-        self.boardSize = int(boardSize)
+        if (2 < boardSize < 17):
+            self.boardSize = int(boardSize)
+        else:
+            self.boardSize = int(8)
         self.emptySpaces = self.boardSize * self.boardSize
         self.gameType = gameType
         self.blueScore = 0
@@ -16,6 +19,10 @@ class SOSBoard:
             for j in i:
                 print(j, end=" ")
             print()
+
+    def setBoardSize(self,size):
+        self.boardSize = int(size)
+        self.boardArray = [[" "]*size for i in range(size)]
 
     def getBlueScore(self):
         return self.blueScore
@@ -80,6 +87,3 @@ class SOSBoard:
             self.emptySpaces -= 1
             # print(player,' setting ', letter, ' @ ',moveX,',',moveY)
             return self.checkWin(player, moveX, moveY)
-
-    def setTurn(self, color):
-        self.Turn = color

@@ -12,8 +12,7 @@ TurnColor = "Blue"
 
 def BoardSizeValidation(S):
     try:
-        if (2 > S > 17):
-
+        if (2 < S < 17):
             return True
         else:
             return False
@@ -36,9 +35,10 @@ def on_button_click(btn, x, y):
                 Winner = 'Red Player Wins!'
             else:
                 Winner = 'Tie Game.'
+            TurnText.config(text=Winner)
             print(
                 f"[Blue:{gameBoard.getBlueScore()}|Red:{gameBoard.getRedScore()}] - {Winner}")
-            exit()
+            
         else:
             if TurnPlayer.getColor() == 'Blue':
                 TurnPlayer = RedPlayer
@@ -47,16 +47,23 @@ def on_button_click(btn, x, y):
                 TurnPlayer = BluePlayer
                 TurnText.config(text="Current turn: Blue",)
 
-
 def StartNewGame(size, type):
     global Board, gameBoard, TurnPlayer, CenterFrame, TurnText
     print('\nInitializing ', type, ' ', size, ' x ', size)
-    Board = [[[] for _ in range(size)] for _ in range(size)]
+    TurnPlayer = BluePlayer
+    
+
     for widget in CenterFrame.winfo_children():
         widget.destroy()
 
-    gameBoard = SOSBoard.SOSBoard(size, type)
-    TurnPlayer = BluePlayer
+    if BoardSizeValidation(size): #TODO: move to board logic AND to field validation.
+        gameBoard = SOSBoard.SOSBoard(size, type)
+        Board = [[[] for _ in range(size)] for _ in range(size)]
+    else:
+        print('\nInvalid Size used, reseting to default')
+        gameBoard = SOSBoard.SOSBoard(8, type)
+        size = 8
+        Board = [[[] for _ in range(8)] for _ in range(8)]
 
     for row in range(size):
         for col in range(size):
@@ -74,10 +81,15 @@ def StartNewGame(size, type):
                      ipadx=4, ipady=1, sticky="NWSE")
             Board[row][col] = btn
     TurnText = tk.Label(CenterFrame, text="Current turn: Blue")
-    TurnText.grid(row=Boardsize.get()+1, columnspan=Boardsize.get(),
+    TurnText.grid(row=size+1, columnspan=size,
                   column=0, sticky="S", padx=2, pady=(10, 5))
     return gameBoard
 
+def SizeCheck(event,size):
+    if  BoardSizeValidation(size):  # Check if the new size is valid
+        return size
+    else:    
+        return 8
 
 # top row frame, equal left and right frames, gameboard center frame
 window = tk.Tk()
@@ -108,16 +120,18 @@ GameR2.grid(row=0, column=2, padx=2, pady=2)
 BoardText = tk.Label(TopFrame, text="Board size", anchor="e", justify="right")
 BoardText.grid(row=0, column=3, sticky="e", padx=(80, 2), pady=2)
 
-Boardsize = tk.IntVar()
-Boardsize.set(8)
+BoardSize = tk.IntVar()
+BoardSize.set(8)
 
-reg = TopFrame.register(BoardSizeValidation(Boardsize.get()))
-BoardSizeBox = tk.Entry(TopFrame, textvariable=Boardsize, width=2)
+reg = TopFrame.register(8)
+BoardSizeBox = tk.Entry(TopFrame, textvariable=BoardSize, width=3)
+BoardSizeBox.bind(
+    '<FocusOut>', lambda event: BoardSize.set(SizeCheck(event,BoardSize.get()))) #field validation
+BoardSizeBox.bind(
+    '<Return>', lambda event: BoardSize.set(SizeCheck(event,BoardSize.get()))) #field validation
 BoardSizeBox.grid(row=0, column=4, sticky="e", padx=5, pady=5)
 
-# print('\nInitializing simple ', Boardsize.get(), ' x ', Boardsize.get())
-
-gameBoard = StartNewGame(Boardsize.get(), GameType.get())
+gameBoard = StartNewGame(BoardSize.get(), GameType.get())
 
 
 # left frame - blue player label, human/computer radio buttons, S/O radio buttons
@@ -153,7 +167,7 @@ RecordGame = tk.BooleanVar()
 RecordCheckButton = tk.Checkbutton(
     LeftFrame, text='Record Game', state='disabled', variable=RecordGame)
 RecordCheckButton.grid(row=6, column=0, padx=5, pady=(
-    (Boardsize.get()*10+5), 5), sticky="s")
+    (BoardSize.get()*10+5), 5), sticky="s")
 
 # right frame - red player label, human/computer radio buttons, S/O radio buttons
 RedType = tk.StringVar()
@@ -187,7 +201,7 @@ RedPlayerR2.grid(row=4, column=0, padx=(4, 2), pady=2)
 NewGame = tk.Button(RightFrame, text="New Game", width=1,
                     height=1, background="White")
 NewGame.bind(
-    '<Button-1>', lambda event: StartNewGame(Boardsize.get(), GameType.get()))
+    '<Button-1>', lambda event: StartNewGame(BoardSize.get(), GameType.get()))
 NewGame.grid(row=8, column=0, padx=(1, 0), ipadx=4, ipady=10, sticky="NWSE")
 
 window.mainloop()
