@@ -10,7 +10,7 @@ TurnPlayer = BluePlayer
 TurnColor = "Blue"
 
 
-def BoardSizeValidation(S):
+""" def BoardSizeValidation(S):
     try:
         if (2 < S < 17):
             return True
@@ -18,26 +18,26 @@ def BoardSizeValidation(S):
             return False
     except:
         return False
-
+ """
 
 def on_button_click(btn, x, y):
     global BluePlayer, RedPlayer, TurnPlayer, gameBoard, TurnText
-    print(
-        f"Updating button at ({x}, {y}) with letter: {TurnPlayer.getLetter()} by {TurnPlayer.getColor()}")
+    #print(
+    #    f"Updating button at ({x}, {y}) with letter: {TurnPlayer.getLetter()} by {TurnPlayer.getColor()}")
     if gameBoard.getPlace(x, y) == " ":
         btn.config(text=TurnPlayer.getLetter())
         result = gameBoard.makeMove(
             TurnPlayer.getColor(), TurnPlayer.getLetter(), x, y)
-        if result == True:
+        if result == True: #game over, report winner
             if gameBoard.getBlueScore() > gameBoard.getRedScore():
-                Winner = 'Blue Player Wins!'
+                Wintext = 'Blue Player Wins!'
             elif(gameBoard.getBlueScore() < gameBoard.getRedScore()):
-                Winner = 'Red Player Wins!'
+                Wintext = 'Red Player Wins!'
             else:
-                Winner = 'Tie Game.'
-            TurnText.config(text=Winner)
-            print(
-                f"[Blue:{gameBoard.getBlueScore()}|Red:{gameBoard.getRedScore()}] - {Winner}")
+                Wintext = 'Tie Game.'
+            TurnText.config(text=Wintext)
+            #print(
+             #   f"[Blue:{gameBoard.getBlueScore()}|Red:{gameBoard.getRedScore()}] - {Winner}")
             
         else:
             if TurnPlayer.getColor() == 'Blue':
@@ -49,21 +49,23 @@ def on_button_click(btn, x, y):
 
 def StartNewGame(size, type):
     global Board, gameBoard, TurnPlayer, CenterFrame, TurnText
-    print('\nInitializing ', type, ' ', size, ' x ', size)
+    #print('\nInitializing ', type, ' ', size, ' x ', size)
     TurnPlayer = BluePlayer
     
-
-    for widget in CenterFrame.winfo_children():
+    for widget in CenterFrame.winfo_children():#clear center frame before drawing new board
         widget.destroy()
 
-    if BoardSizeValidation(size): #TODO: move to board logic AND to field validation.
-        gameBoard = SOSBoard.SOSBoard(size, type)
-        Board = [[[] for _ in range(size)] for _ in range(size)]
+    #if not BoardSizeValidation(size):
+    #    #print('\nInvalid Size used, reseting to default')
+    #    size = 8
+    
+    size =SizeCheck(any,size)
+
+    if type == "Simple":
+        gameBoard = SOSBoard.SOSSimpleBoard(size)
     else:
-        print('\nInvalid Size used, reseting to default')
-        gameBoard = SOSBoard.SOSBoard(8, type)
-        size = 8
-        Board = [[[] for _ in range(8)] for _ in range(8)]
+        gameBoard = SOSBoard.SOSGeneralBoard(size)
+    Board = [[[] for _ in range(size)] for _ in range(size)]
 
     for row in range(size):
         for col in range(size):
@@ -86,7 +88,7 @@ def StartNewGame(size, type):
     return gameBoard
 
 def SizeCheck(event,size):
-    if  BoardSizeValidation(size):  # Check if the new size is valid
+    if (2 < size < 17):  # Check if the new size is valid
         return size
     else:    
         return 8
