@@ -9,16 +9,14 @@ RedPlayer = SOSPlayer.SOSPlayer('Red', 'Human', 'S')
 TurnPlayer = BluePlayer
 TurnColor = "Blue"
 
-
-""" def BoardSizeValidation(S):
-    try:
-        if (2 < S < 17):
-            return True
-        else:
-            return False
-    except:
-        return False
- """
+def changeTurn(color):
+    global TurnText, TurnPlayer
+    if TurnPlayer.getColor() == 'Blue':
+        TurnPlayer = RedPlayer
+        TurnText.config(text="Current turn: Red")
+    else:
+        TurnPlayer = BluePlayer
+        TurnText.config(text="Current turn: Blue")
 
 def on_button_click(btn, x, y):
     global BluePlayer, RedPlayer, TurnPlayer, gameBoard, TurnText
@@ -39,13 +37,9 @@ def on_button_click(btn, x, y):
             #print(
              #   f"[Blue:{gameBoard.getBlueScore()}|Red:{gameBoard.getRedScore()}] - {Winner}")
             
-        else:
-            if TurnPlayer.getColor() == 'Blue':
-                TurnPlayer = RedPlayer
-                TurnText.config(text="Current turn: Red")
-            else:
-                TurnPlayer = BluePlayer
-                TurnText.config(text="Current turn: Blue",)
+        else:   #if game not over, change player
+            changeTurn(TurnPlayer.getColor())
+
 
 def StartNewGame(size, type):
     global Board, gameBoard, TurnPlayer, CenterFrame, TurnText
@@ -59,7 +53,7 @@ def StartNewGame(size, type):
     #    #print('\nInvalid Size used, reseting to default')
     #    size = 8
     
-    size =SizeCheck(any,size)
+    size = SizeCheck(any,size)
 
     if type == "Simple":
         gameBoard = SOSBoard.SOSSimpleBoard(size)

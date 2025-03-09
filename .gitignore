@@ -2,3 +2,5 @@ target/
 
 ### VS Code ###
 .vscode/
+__pycache__/SOSBoard.cpython-312.pyc
+__pycache__/SOSPlayer.cpython-312.pyc
