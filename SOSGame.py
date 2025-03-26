@@ -1,20 +1,14 @@
 import tkinter as tk
 import SOSBoard
-import SOSPlayer
-
-# initialize players
-#global BluePlayer, RedPlayer, TurnPlayer, Board, gameBoard, CenterFrame #move to board state class
-
-
 
 def onButtonClick(btn,TurnText,gameBoard, x, y):
-    #global BluePlayer, RedPlayer, TurnPlayer, gameBoard, TurnText #move to board state class
 
     if gameBoard.getPlace(x, y) == " ":
+        letter = gameBoard.getTurn().getLetter()
         result = gameBoard.makeMove(x, y)
         blueScore = gameBoard.getBlueScore()
         redScore = gameBoard.getRedScore()
-        btn.config(text=gameBoard.getTurn().getLetter())
+        btn.config(text=letter)
         if result == True: #game over, report winner
             if blueScore > redScore :
                 TurnText.config(text=("Blue Player Wins! (" + str(blueScore) + "|" + str(redScore) + ")"))
@@ -23,8 +17,7 @@ def onButtonClick(btn,TurnText,gameBoard, x, y):
             else:
                 TurnText.config(text=("Tie Game. ("+str(redScore)+"|"+str(blueScore)+")"))
 
-        else:   #if game not over, change player            
-            #gameBoard.changeTurn() #update gameboard
+        else:  
             if(gameBoard.getTurn().getColor() == 'Blue'):
                 TurnText.config(text="Current turn: Blue") #update GUI
             else:
