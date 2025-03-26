@@ -89,6 +89,7 @@ class SOSSimpleBoard:
             self.boardArray[moveX][moveY] = self.getTurn().getLetter()
             self.emptySpaces -= 1
             self.checkWin(moveX, moveY)
+            self.changeTurn()
             return self.checkEnd()
         
 class SOSGeneralBoard(SOSSimpleBoard):

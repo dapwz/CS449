@@ -1,84 +1,62 @@
 import unittest
-from SOSBoard import SOSBoard
 from SOSPlayer import SOSPlayer
+from SOSBoard import SOSSimpleBoard, SOSGeneralBoard
 
 class TestSOSGame(unittest.TestCase):
-    
-    def setUp(self):
-        self.board = SOSBoard(8, 'Simple')
-        self.blue_player = SOSPlayer('Blue', 'Human', 'S')
-        self.red_player = SOSPlayer('Red', 'Human', 'O')
-    
-    # AC 1.1, AC 3.1: Test valid board creation
-    def test_board_initialization(self):
-        self.assertEqual(self.board.boardSize, 8)
-        self.assertEqual(self.board.emptySpaces, 64)
-    
-    # AC 1.2, AC 3.2: Test invalid board size handling
-    def test_invalid_board_size(self):
-        invalid_board = SOSBoard(20, 'Simple')
-        self.assertEqual(invalid_board.boardSize, 8)  # Default to 8
-        small_board = SOSBoard(2, 'Simple')
-        self.assertEqual(small_board.boardSize, 8)  # Default to 8
-    
-    # AC 1.3: Test board defaults to 8 on launch or error
+    # AC 1.1: New game boards will be the size of the entered value
+    def test_board_size_valid(self):
+        board = SOSSimpleBoard(5)
+        self.assertEqual(board.boardSize, 5)
+
+    # AC 1.2: New game boards will fail to be created
+    def test_board_size_invalid(self):
+        board = SOSSimpleBoard(2)
+        self.assertEqual(board.boardSize, 8)
+        board = SOSSimpleBoard(17)
+        self.assertEqual(board.boardSize, 8)
+
+    # AC 1.3: Board size value defaults to 8
     def test_board_default_size(self):
-        default_board = SOSBoard(8, 'Simple')
-        self.assertEqual(default_board.boardSize, 8)
-    
-    # AC 2.1, AC 4.2: Test simple game mode win condition
-    def test_check_win_simple(self):
-        self.board.makeMove('Blue', 'S', 1, 1)
-        self.board.makeMove('Red', 'O', 2, 2)
-        self.board.makeMove('Blue', 'S', 3, 3)
-        result = self.board.checkWin('Blue', 2, 2)
+        board = SOSSimpleBoard(0)
+        self.assertEqual(board.boardSize, 8)
+
+    # AC 2.1: Simple game mode win condition
+    def test_simple_game_win(self):
+        board = SOSSimpleBoard(3)
+        board.getRedPlayer().setLetter('O')
+        board.makeMove(0, 1)
+        board.makeMove(1, 1)
+        result = board.makeMove(2, 1)
         self.assertTrue(result)
-        self.assertEqual(self.board.blueScore, 1)
-    
-    # AC 2.2, AC 5.2: Test general game mode win condition when the board is full
-    def test_check_win_general(self):
-        general_board = SOSBoard(8, 'General')
-        for x in range(1, 9):
-            for y in range(1, 9):
-                general_board.makeMove('Blue', 'S' if (x + y) % 2 == 0 else 'O', x, y)
-        self.assertTrue(general_board.checkWin('Blue', 8, 8))
-    
-    # AC 4.1, AC 5.1: Test selecting an occupied space
-    def test_invalid_move(self):
-        self.board.makeMove('Blue', 'S', 1, 1)
-        self.board.makeMove('Red', 'O', 1, 1)
-        self.assertEqual(self.board.getPlace(1, 1), 'S')  # Should still be 'S'
-    
-    # AC 4.3, AC 5.3: Test selecting an unoccupied space updates board and changes turn
+
+    # AC 2.2: General game mode win condition
+    def test_general_game_win(self):
+        board = SOSGeneralBoard(3)
+        for x in range(3):
+            for y in range(3):
+                board.makeMove(x, y)
+        self.assertTrue(board.checkEnd())
+
+    # AC 4.1 & 5.1: Selecting an occupied space
+    def test_occupied_space_error(self):
+        board = SOSSimpleBoard(3)
+        board.makeMove(1, 1)
+        self.assertEqual(board.getPlace(1, 1), 'S')
+        board.makeMove(1, 1)
+        self.assertEqual(board.getPlace(1, 1), 'S')
+
+    # AC 4.3 & 5.3: Selecting an unoccupied space
     def test_valid_move_updates_board(self):
-        self.board.makeMove('Blue', 'S', 1, 1)
-        self.assertEqual(self.board.getPlace(1, 1), 'S')
-        self.assertEqual(self.board.emptySpaces, 63)
-    
-    # AC 3.1: Test creating a new board with a valid size
-    def test_create_new_board(self):
-        new_board = SOSBoard(5, 'Simple')
-        self.assertEqual(new_board.boardSize, 5)
-    
-    # AC 5.2: Test selecting the last available space triggers game end
-    def test_last_move_triggers_game_end(self):
-        general_board = SOSBoard(3, 'General')
-        for x in range(1, 4):
-            for y in range(1, 4):
-                general_board.makeMove('Blue', 'S' if (x + y) % 2 == 0 else 'O', x, y)
-        self.assertTrue(general_board.checkWin('Blue', 3, 3))
-    
-    # Player tests
-    def test_player_attributes(self):
-        self.assertEqual(self.blue_player.getColor(), 'Blue')
-        self.assertEqual(self.red_player.getType(), 'Human')
-        self.assertEqual(self.red_player.getLetter(), 'O')
-    
-    def test_change_player_attributes(self):
-        self.blue_player.setLetter('O')
-        self.assertEqual(self.blue_player.getLetter(), 'O')
-        self.red_player.setType('Computer')
-        self.assertEqual(self.red_player.getType(), 'Computer')
+        board = SOSSimpleBoard(3)
+        board.makeMove(1, 1)
+        self.assertEqual(board.getPlace(1, 1), 'S')
+
+    # Player switching (not explicitly covered in ACs but relevant to gameplay)
+    def test_player_switch_after_move(self):
+        board = SOSSimpleBoard(3)
+        first_turn = board.getTurn()
+        board.makeMove(1, 1)
+        self.assertNotEqual(first_turn, board.getTurn())
 
 if __name__ == '__main__':
     unittest.main()

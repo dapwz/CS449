@@ -24,7 +24,7 @@ def onButtonClick(btn,TurnText,gameBoard, x, y):
                 TurnText.config(text=("Tie Game. ("+str(redScore)+"|"+str(blueScore)+")"))
 
         else:   #if game not over, change player            
-            gameBoard.changeTurn() #update gameboard
+            #gameBoard.changeTurn() #update gameboard
             if(gameBoard.getTurn().getColor() == 'Blue'):
                 TurnText.config(text="Current turn: Blue") #update GUI
             else:
