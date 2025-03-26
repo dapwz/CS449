@@ -1,23 +1,25 @@
+import SOSPlayer
+
 class SOSSimpleBoard:
     def __init__(self, boardSize):
-        if (2 < boardSize < 17):
-            self.boardSize = int(boardSize)
-        else:
+        try:
+            if (2 < boardSize < 17):
+                self.boardSize = int(boardSize)
+            else:
+                self.boardSize = int(8)
+        except:
             self.boardSize = int(8)
-        self.emptySpaces = self.boardSize * self.boardSize 
-        #self.gameType = gameType #change to inheritance model
+
+        self.emptySpaces = self.boardSize  * self.boardSize 
+        self.redPlayer = SOSPlayer.SOSPlayer('Red', 'Human', 'S')
+        self.bluePlayer = SOSPlayer.SOSPlayer('Blue', 'Human', 'S')
         self.blueScore = 0
         self.redScore = 0
-        self.boardArray = [[" "]*boardSize for i in range(boardSize)]
-        self.turn = 'Blue'
+        self.boardArray = [[" "]*boardSize for i in range(self.boardSize)]
+        self.turn = self.bluePlayer
 
-    def printBoard(self):
-        print('Printing ', self.boardSize,
-              ' x ', self.boardSize, ' board:')
-
-    def setBoardSize(self,size):
-        self.boardSize = int(size)
-        self.boardArray = [[" "]*size for i in range(size)]
+    def resetBoard(self, size):
+        self.__init__(size)
 
     def getBlueScore(self):
         return self.blueScore
@@ -25,66 +27,74 @@ class SOSSimpleBoard:
     def getRedScore(self):
         return self.redScore
 
+    def getBluePlayer(self):
+        return self.bluePlayer
+
+    def getRedPlayer(self):
+        return self.redPlayer
+    
+    def getTurn(self):
+        return self.turn
+    
     def getPlace(self, X, Y):
-        if 0 <= X <= (self.boardSize) and 0 <= Y <= (self.boardSize):
-            return self.boardArray[X-1][Y-1]
-        else:
+        try:
+            if 0 <= X <= (self.boardSize) and 0 <= Y <= (self.boardSize):
+                return self.boardArray[X][Y]
+            else:
+                return ' '
+        except:
             return ' '
 
-    def checkforSWin(self,player,moveX,moveY):
+
+    def changeTurn(self):
+        if self.turn == self.bluePlayer:
+            self.turn = self.redPlayer
+        else:
+            self.turn = self.bluePlayer
+
+    def checkforSWin(self,moveX,moveY):
         for x in range(moveX-1, moveX+2):
                 for y in range(moveY-1, moveY+2):
                     if (x != moveX or y != moveY) and self.getPlace(x, y) == 'O':
                         if self.getPlace(x+(x-moveX), y+(y-moveY)) == 'S':
-                            if player == 'Blue':
+                            if self.turn.getColor() == 'Blue':
                                 self.blueScore += 1
                             else:
-                                self.redScore += 1
+                                self.redScore += 1 
 
+    def checkforOWin(self, moveX, moveY):
+        directions = [(-1, -1), (-1, 0), (-1, 1), (0, -1)]
+        for dx, dy in directions:
+            # Check if there's an 'S' before and after the placed 'O'
+            if self.getPlace(moveX + dx, moveY + dy) == 'S' and self.getPlace(moveX - dx, moveY - dy) == 'S':
+                if self.turn.getColor() == 'Blue':
+                    self.blueScore += 1
+                else:
+                    self.redScore += 1
 
-    def checkforOWin(self,player,moveX,moveY):
-        # loop through one side (horizontal and diagonal x2)
-        for x in range(moveX-1, moveX+1):
-            if self.getPlace(x, moveY) == 'S':
-                if self.getPlace(moveX+(moveX-x), moveY) == 'S':
-                    if player == 'Blue':
-                        self.blueScore += 1
-                    else:
-                        self.redScore += 1
-
-        else:
-            return False
-
-    def checkWin(self, player, moveX, moveY):
+    def checkWin(self, moveX, moveY):
         if self.getPlace(moveX, moveY) == 'O':
-            self.checkforOWin(player,moveX,moveY)
+            self.checkforOWin(moveX,moveY)
         elif self.getPlace(moveX, moveY) == 'S': 
-            self.checkforSWin(player,moveX,moveY)
-
+            self.checkforSWin(moveX,moveY)
+    
+    def checkEnd(self):
         # simple win state = blue or red score over 0, or no more spaces
         if (self.blueScore > 0 or self.redScore > 0 or self.emptySpaces ==0):
             return True
         return False
 
-    def makeMove(self, player, letter, moveX, moveY):
-        arrayX = moveX - 1
-        arrayY = moveY - 1
-        if self.boardArray[arrayX][arrayY] == ' ':
-            #print("Error: ", moveX, ",", moveX, ' already occupied.')
-            self.boardArray[arrayX][arrayY] = letter
+    def makeMove(self, moveX, moveY):
+        if self.boardArray[moveX][moveY] == ' ':
+            self.boardArray[moveX][moveY] = self.getTurn().getLetter()
             self.emptySpaces -= 1
-            # print(player,' setting ', letter, ' @ ',moveX,',',moveY)
-            return self.checkWin(player, moveX, moveY)
+            self.checkWin(moveX, moveY)
+            return self.checkEnd()
         
 class SOSGeneralBoard(SOSSimpleBoard):
-    def checkWin(self, player, moveX, moveY):
-        if self.getPlace(moveX, moveY) == 'O':
-            self.checkforOWin(player,moveX,moveY)
-        elif self.getPlace(moveX, moveY) == 'S': 
-            self.checkforSWin(player,moveX,moveY)
-            
+    def checkEnd(self):        
      # general win state = no remaining spaces
         if self.emptySpaces == 0: 
             return True
-
-        return False
+        else:
+            return False
