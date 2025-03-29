@@ -1,6 +1,7 @@
 import SOSPlayer
+import SOSComputer
 
-class SOSSimpleBoard:
+class SOSBoard:
     def __init__(self, boardSize):
         try:
             if (2 < boardSize < 17):
@@ -45,6 +46,8 @@ class SOSSimpleBoard:
         except:
             return ' '
 
+    def getBoardSize(self):
+        return self.boardSize
 
     def changeTurn(self):
         if self.turn == self.bluePlayer:
@@ -52,32 +55,36 @@ class SOSSimpleBoard:
         else:
             self.turn = self.bluePlayer
 
-    def checkforSWin(self,moveX,moveY):
-        for x in range(moveX-1, moveX+2):
-                for y in range(moveY-1, moveY+2):
-                    if (x != moveX or y != moveY) and self.getPlace(x, y) == 'O':
-                        if self.getPlace(x+(x-moveX), y+(y-moveY)) == 'S':
-                            if self.turn.getColor() == 'Blue':
-                                self.blueScore += 1
-                            else:
-                                self.redScore += 1 
+    def checkWin(self, moveX, moveY):  # Combined S and O win checks
+        if self.getPlace(moveX, moveY) not in ('S', 'O'): #check if valid move
+            return  
 
-    def checkforOWin(self, moveX, moveY):
-        directions = [(-1, -1), (-1, 0), (-1, 1), (0, -1)]
-        for dx, dy in directions:
-            # Check if there's an 'S' before and after the placed 'O'
-            if self.getPlace(moveX + dx, moveY + dy) == 'S' and self.getPlace(moveX - dx, moveY - dy) == 'S':
-                if self.turn.getColor() == 'Blue':
-                    self.blueScore += 1
-                else:
-                    self.redScore += 1
+        # offsets for all 8 directions
+        directions = [(-1, -1), (-1, 0), (-1, 1), (0, -1),
+                    (0, 1), (1, -1), (1, 0), (1, 1)]
 
-    def checkWin(self, moveX, moveY):
-        if self.getPlace(moveX, moveY) == 'O':
-            self.checkforOWin(moveX,moveY)
-        elif self.getPlace(moveX, moveY) == 'S': 
-            self.checkforSWin(moveX,moveY)
-    
+        for dx, dy in directions: # Check for SOS in all directions
+            try:
+                if self.getPlace(moveX, moveY) == 'S': #if S placed, check for O and S
+                    if (self.getPlace(moveX + dx, moveY + dy) == 'O' and 
+                        self.getPlace(moveX + 2 * dx, moveY + 2 * dy) == 'S'):
+                        if self.turn.getColor() == 'Blue':
+                            self.blueScore += 1
+                        else:
+                            self.redScore += 1
+
+                elif self.getPlace(moveX, moveY) == 'O': #if O placed, check for S on opposite sides
+                    if (self.getPlace(moveX + dx, moveY + dy) == 'S' and 
+                        self.getPlace(moveX - dx, moveY - dy) == 'S'):
+                        if self.turn.getColor() == 'Blue':
+                            self.blueScore += 1
+                        else:
+                            self.redScore += 1
+
+            except IndexError: #skip invalid array values
+                continue  
+
+
     def checkEnd(self):
         # simple win state = blue or red score over 0, or no more spaces
         if (self.blueScore > 0 or self.redScore > 0 or self.emptySpaces ==0):
@@ -91,8 +98,23 @@ class SOSSimpleBoard:
             self.checkWin(moveX, moveY)
             self.changeTurn()
             return self.checkEnd()
-        
-class SOSGeneralBoard(SOSSimpleBoard):
+
+
+class SOSSimpleBoard(SOSBoard):
+    def __init__(self,boardSize):
+        super().__init__(boardSize)
+
+    def checkEnd(self):
+        # simple win state = blue or red score over 0, or no more spaces
+        if (self.blueScore > 0 or self.redScore > 0 or self.emptySpaces ==0):
+            return True
+        return False
+
+
+class SOSGeneralBoard(SOSBoard):
+    def __init__(self,boardSize):
+        super().__init__(boardSize)
+
     def checkEnd(self):        
      # general win state = no remaining spaces
         if self.emptySpaces == 0: 

@@ -90,11 +90,11 @@ RightFrame = tk.Frame(window, width=100, height=200)
 
 TopFrame.pack(fill=tk.NONE, side=tk.TOP)
 LeftFrame.pack(fill=tk.BOTH, side=tk.LEFT)
-CenterFrame.pack(fill=tk.BOTH, side=tk.LEFT)
+CenterFrame.pack(fill=tk.BOTH, side=tk.CENTER)
 RightFrame.pack(fill=tk.BOTH, side=tk.RIGHT)
 
 # top frame label, 2x radio buttons, label, entry box
-SOSText = tk.Label(TopFrame, text="SOS", anchor="w", padx=2, pady=2)
+SOSText = tk.Label(TopFrame, text="SOS", anchor="N", padx=2, pady=2)
 SOSText.grid(row=0, column=0)
 
 GameType = tk.StringVar()
