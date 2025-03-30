@@ -3,7 +3,7 @@ class SOSPlayer:
         self.PlayerLetter = PlayerLetter
         self.PlayerColor = PlayerColor
         self.PlayerType = PlayerType
-
+        
     def getLetter(self):
         return self.PlayerLetter
     

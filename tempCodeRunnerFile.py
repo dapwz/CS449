@@ -1,1 +1,1 @@
-import SOSBoard
+Computer

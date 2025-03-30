@@ -1,5 +1,5 @@
 import SOSPlayer
-import SOSComputer
+import SOSComputer as Computer
 
 class SOSBoard:
     def __init__(self, boardSize):
@@ -55,41 +55,38 @@ class SOSBoard:
         else:
             self.turn = self.bluePlayer
 
+
     def checkWin(self, moveX, moveY):  # Combined S and O win checks
         if self.getPlace(moveX, moveY) not in ('S', 'O'): #check if valid move
             return  
 
         # offsets for all 8 directions
         directions = [(-1, -1), (-1, 0), (-1, 1), (0, -1),
-                    (0, 1), (1, -1), (1, 0), (1, 1)]
-
-        for dx, dy in directions: # Check for SOS in all directions
-            try:
-                if self.getPlace(moveX, moveY) == 'S': #if S placed, check for O and S
+                    (0, 1)]
+        
+        if self.getPlace(moveX, moveY) == 'S': #if S placed, check for O and S
+            for dx, dy in directions: # Check for SOS in all directions
+                try:
                     if (self.getPlace(moveX + dx, moveY + dy) == 'O' and 
                         self.getPlace(moveX + 2 * dx, moveY + 2 * dy) == 'S'):
                         if self.turn.getColor() == 'Blue':
                             self.blueScore += 1
                         else:
                             self.redScore += 1
+                except IndexError: #skip invalid array values
+                    continue 
 
-                elif self.getPlace(moveX, moveY) == 'O': #if O placed, check for S on opposite sides
+        elif self.getPlace(moveX, moveY) == 'O': #if O placed, check for S on opposite sides              
+            for dx, dy in directions: # Check for SOS in all directions
+                try: 
                     if (self.getPlace(moveX + dx, moveY + dy) == 'S' and 
                         self.getPlace(moveX - dx, moveY - dy) == 'S'):
                         if self.turn.getColor() == 'Blue':
                             self.blueScore += 1
                         else:
                             self.redScore += 1
-
-            except IndexError: #skip invalid array values
-                continue  
-
-
-    def checkEnd(self):
-        # simple win state = blue or red score over 0, or no more spaces
-        if (self.blueScore > 0 or self.redScore > 0 or self.emptySpaces ==0):
-            return True
-        return False
+                except IndexError: #skip invalid array values
+                    continue
 
     def makeMove(self, moveX, moveY):
         if self.boardArray[moveX][moveY] == ' ':

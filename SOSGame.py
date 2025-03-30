@@ -1,7 +1,8 @@
 import tkinter as tk
 import SOSBoard
+import SOSComputer as computer
 
-def onButtonClick(btn,TurnText,gameBoard, x, y):
+def onButtonClick(btn, btnBoard, TurnText,gameBoard, x, y):
 
     if gameBoard.getPlace(x, y) == " ":
         letter = gameBoard.getTurn().getLetter()
@@ -23,13 +24,26 @@ def onButtonClick(btn,TurnText,gameBoard, x, y):
             else:
                 TurnText.config(text="Current turn: Red") #update GUI
 
+def computerMove(btnBoard,TurnText,gameBoard):
+    if checkComputer(gameBoard):
+        x,y = computer.ComputerPlayer.findMove(gameBoard)
+        computerbtn = btnBoard[x][y]
+        onButtonClick(computerbtn,btnBoard,TurnText,gameBoard,x,y)
+
+
+def checkComputer(gameBoard):
+    if gameBoard.getTurn().getType() == 'Computer':
+        return True
+    else:
+        return False
+
 def InitializeGameBoard(CenterFrame):
     gameBoard = SOSBoard.SOSSimpleBoard(8) #start with default board
     StartNewGame(gameBoard,CenterFrame,8,'Simple')
     return gameBoard
 
 def StartNewGame(gameBoard, CenterFrame, size, type):
-
+    size = SizeCheck(size)
     for widget in CenterFrame.winfo_children():#clear center frame before drawing new board
         widget.destroy()
 
@@ -54,21 +68,25 @@ def StartNewGame(gameBoard, CenterFrame, size, type):
             )
             btn.bind('<Button-1>', lambda event,
                      btn=btn, gameBoard=gameBoard,
-                     row=row, col=col: onButtonClick(btn,TurnText, gameBoard, row, col))
+                     row=row, col=col, Board=Board: [onButtonClick(btn,Board,TurnText, gameBoard, row, col), computerMove(Board,TurnText,gameBoard)])
+
             btn.grid(row=row, column=col, padx=(1, 0),
                      ipadx=4, ipady=1, sticky="NWSE")
             Board[row][col] = btn
 
     TurnText.grid(row=size+1, columnspan=size,
                   column=0, sticky="S", padx=2, pady=(10, 5))
-    return gameBoard
+    return gameBoard , Board
 
 def callback(input): 
-    if input.isdigit(): 
-        return True     
-    elif input == "":
-        return True
-    else:  
+    try:
+        if input.isdigit(): 
+            return True     
+        elif input == "":
+            return True
+        else:  
+            return False
+    except:
         return False
 
 def SizeCheck(size):
@@ -90,11 +108,11 @@ RightFrame = tk.Frame(window, width=100, height=200)
 
 TopFrame.pack(fill=tk.NONE, side=tk.TOP)
 LeftFrame.pack(fill=tk.BOTH, side=tk.LEFT)
-CenterFrame.pack(fill=tk.BOTH, side=tk.CENTER)
+CenterFrame.pack(fill=tk.BOTH, side=tk.LEFT)
 RightFrame.pack(fill=tk.BOTH, side=tk.RIGHT)
 
 # top frame label, 2x radio buttons, label, entry box
-SOSText = tk.Label(TopFrame, text="SOS", anchor="N", padx=2, pady=2)
+SOSText = tk.Label(TopFrame, text="SOS", anchor="e", padx=2, pady=2)
 SOSText.grid(row=0, column=0)
 
 GameType = tk.StringVar()
@@ -135,12 +153,12 @@ BlueText.grid(row=1, column=0, sticky="w", padx=2, pady=5)
 
 BlueTypeR1 = tk.Radiobutton(LeftFrame, text='Human',
                             value='Human', variable=BlueType, justify="left")
-BlueTypeR1.bind('<Button-1>', lambda event: gameBoard.getBluePlayer().setType('Human'))
+BlueTypeR1.bind('<Button-1>', lambda event, gameBoard=gameBoard: gameBoard.getBluePlayer().setType('Human'))
 BlueTypeR1.grid(row=2, column=0, padx=2, pady=2)
 
 BlueTypeR2 = tk.Radiobutton(
     LeftFrame, text='Computer', value='Computer', variable=BlueType, justify="left")
-BlueTypeR2.bind('<Button-1>', lambda event, gameBoard=gameBoard: gameBoard.getBluePlayer().setType('Human'))
+BlueTypeR2.bind('<Button-1>', lambda event, gameBoard=gameBoard: gameBoard.getBluePlayer().setType('Computer'))
 BlueTypeR2.grid(row=5, column=0, padx=2, pady=2)
 
 BluePlayerR1 = tk.Radiobutton(
@@ -170,22 +188,22 @@ RedText.grid(row=1, column=0, sticky="e", padx=2, pady=5)
 
 RedTypeR1 = tk.Radiobutton(RightFrame, text='Human',
                            value='Human', variable=RedType, justify="left")
-RedTypeR1.bind('<Button-1>', lambda event: gameBoard.getRedPlayer().setType('Human'))
+RedTypeR1.bind('<Button-1>', lambda event, gameBoard=gameBoard: gameBoard.getRedPlayer().setType('Human'))
 RedTypeR1.grid(row=2, column=0, padx=2, pady=2)
 
 RedTypeR2 = tk.Radiobutton(RightFrame, text='Computer',
                            value='Computer', variable=RedType, justify="left")
-RedTypeR2.bind('<Button-1>', lambda event: gameBoard.getRedPlayer().setType('Computer'))
+RedTypeR2.bind('<Button-1>', lambda event, gameBoard=gameBoard: gameBoard.getRedPlayer().setType('Computer'))
 RedTypeR2.grid(row=5, column=0, padx=2, pady=2)
 
 RedPlayerR1 = tk.Radiobutton(
     RightFrame, text='S', value='S', variable=RedLetter, justify="left")
-RedPlayerR1.bind('<Button-1>', lambda event: gameBoard.getRedPlayer().setLetter('S'))
+RedPlayerR1.bind('<Button-1>', lambda event, gameBoard=gameBoard: gameBoard.getRedPlayer().setLetter('S'))
 RedPlayerR1.grid(row=3, column=0, padx=(4, 2), pady=2)
 
 RedPlayerR2 = tk.Radiobutton(
     RightFrame, text='O', value='O', variable=RedLetter, justify="left")
-RedPlayerR2.bind('<Button-1>', lambda event: gameBoard.getRedPlayer().setLetter('O'))
+RedPlayerR2.bind('<Button-1>', lambda event, gameBoard=gameBoard: gameBoard.getRedPlayer().setLetter('O'))
 RedPlayerR2.grid(row=4, column=0, padx=(4, 2), pady=2)
 
 NewGame = tk.Button(RightFrame, text="New Game", width=1,
@@ -193,7 +211,9 @@ NewGame = tk.Button(RightFrame, text="New Game", width=1,
                     )
 NewGame.bind('<Button-1>', lambda event:[StartNewGame(gameBoard,CenterFrame,BoardSize.get(),GameType.get()),
                                     BlueLetter.set('S'),
-                                    RedLetter.set('S')
+                                    RedLetter.set('S'),
+                                    BlueType.set('Human'),
+                                    RedType.set('Human')
                                     ] )
 NewGame.grid(row=8, column=0, padx=(1, 0), ipadx=4, ipady=10, sticky="NWSE")
 
