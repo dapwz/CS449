@@ -1,8 +1,8 @@
 class SOSPlayer:
-    def __init__(self, PlayerColor, PlayerType, PlayerLetter):
-        self.PlayerLetter = PlayerLetter
+    def __init__(self, PlayerColor):
         self.PlayerColor = PlayerColor
-        self.PlayerType = PlayerType
+        self.PlayerLetter = 'S'
+        self.PlayerType = 'Human'
         
     def getLetter(self):
         return self.PlayerLetter

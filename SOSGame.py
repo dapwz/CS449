@@ -17,26 +17,33 @@ def onButtonClick(btn, btnBoard, TurnText,gameBoard, x, y):
                 TurnText.config(text=("Red Player Wins! ("+str(redScore)+"|"+str(blueScore)+ ")"))
             else:
                 TurnText.config(text=("Tie Game. ("+str(redScore)+"|"+str(blueScore)+")"))
-
         else:  
             if(gameBoard.getTurn().getColor() == 'Blue'):
                 TurnText.config(text="Current turn: Blue") #update GUI
+                if gameBoard.getTurn().getType() =='Computer': #if next player is computer, get and make move
+                    CPUx,CPUy = gameBoard.findMove()
+                    CPUbtn = btnBoard[CPUx][CPUy]
+                    onButtonClick(CPUbtn,btnBoard,TurnText,gameBoard,CPUx,CPUy)
             else:
                 TurnText.config(text="Current turn: Red") #update GUI
+                if gameBoard.getTurn().getType() =='Computer':  #if next player is computer, get and make move
+                    CPUx,CPUy = gameBoard.findMove()
+                    CPUbtn = btnBoard[CPUx][CPUy]
+                    onButtonClick(CPUbtn,btnBoard,TurnText,gameBoard,CPUx,CPUy)
 
-def computerMove(btnBoard,TurnText,gameBoard):
-    if checkComputer(gameBoard):
+""" def computerMove(btnBoard,TurnText,gameBoard):
+    if checkComputer(gameBoard) and not gameBoard.checkEnd():
         x,y = computer.ComputerPlayer.findMove(gameBoard)
         computerbtn = btnBoard[x][y]
         onButtonClick(computerbtn,btnBoard,TurnText,gameBoard,x,y)
-
+        computerMove(btnBoard,TurnText,gameBoard) 
 
 def checkComputer(gameBoard):
     if gameBoard.getTurn().getType() == 'Computer':
         return True
     else:
         return False
-
+"""
 def InitializeGameBoard(CenterFrame):
     gameBoard = SOSBoard.SOSSimpleBoard(8) #start with default board
     StartNewGame(gameBoard,CenterFrame,8,'Simple')
@@ -44,16 +51,31 @@ def InitializeGameBoard(CenterFrame):
 
 def StartNewGame(gameBoard, CenterFrame, size, type):
     size = SizeCheck(size)
-    for widget in CenterFrame.winfo_children():#clear center frame before drawing new board
-        widget.destroy()
-
-    if type == 'Simple':
+    blueType = gameBoard.getBluePlayer().getType()
+    redType =  gameBoard.getRedPlayer().getType()
+    CPUgame = (blueType or redType)
+    if type == 'Simple' and CPUgame:
+        gameBoard.__class__ = SOSBoard.SOSSimpleBoardCPU  # Change class to Simple CPU
+    elif type == 'General' and CPUgame:
+        gameBoard.__class__ = SOSBoard.SOSGeneralBoardCPU  # Change class to General CPU
+    elif type == 'Simple':
         gameBoard.__class__ = SOSBoard.SOSSimpleBoard  # Change class to Simple
     else:
         gameBoard.__class__ = SOSBoard.SOSGeneralBoard  # Change class to General
-
+    
     gameBoard.resetBoard(size)
-
+    
+    if blueType == 'Computer' and redType == 'Computer':
+            gameBoard.getBluePlayer().setType('Computer')
+            gameBoard.getRedPlayer().setType('Computer')
+    elif blueType == 'Computer':
+            gameBoard.getBluePlayer().setType('Computer')
+    else:
+            gameBoard.getRedPlayer().setType('Computer')
+    
+    for widget in CenterFrame.winfo_children():#clear center frame before drawing new board
+        widget.destroy()
+    
     Board = [[[] for _ in range(size)] for _ in range(size)]
     TurnText = tk.Label(CenterFrame, text="Current turn: Blue")
 
@@ -68,7 +90,7 @@ def StartNewGame(gameBoard, CenterFrame, size, type):
             )
             btn.bind('<Button-1>', lambda event,
                      btn=btn, gameBoard=gameBoard,
-                     row=row, col=col, Board=Board: [onButtonClick(btn,Board,TurnText, gameBoard, row, col), computerMove(Board,TurnText,gameBoard)])
+                     row=row, col=col, Board=Board: [onButtonClick(btn,Board,TurnText, gameBoard, row, col)])
 
             btn.grid(row=row, column=col, padx=(1, 0),
                      ipadx=4, ipady=1, sticky="NWSE")
@@ -76,6 +98,10 @@ def StartNewGame(gameBoard, CenterFrame, size, type):
 
     TurnText.grid(row=size+1, columnspan=size,
                   column=0, sticky="S", padx=2, pady=(10, 5))
+    if gameBoard.getTurn().getType()== 'Computer':
+        CPUx,CPUy = gameBoard.findMove()
+        CPUbtn = Board[CPUx][CPUy]
+        onButtonClick(CPUbtn,Board,TurnText,gameBoard,CPUx,CPUy)
     return gameBoard , Board
 
 def callback(input): 
@@ -211,9 +237,7 @@ NewGame = tk.Button(RightFrame, text="New Game", width=1,
                     )
 NewGame.bind('<Button-1>', lambda event:[StartNewGame(gameBoard,CenterFrame,BoardSize.get(),GameType.get()),
                                     BlueLetter.set('S'),
-                                    RedLetter.set('S'),
-                                    BlueType.set('Human'),
-                                    RedType.set('Human')
+                                    RedLetter.set('S')
                                     ] )
 NewGame.grid(row=8, column=0, padx=(1, 0), ipadx=4, ipady=10, sticky="NWSE")
 
