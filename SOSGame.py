@@ -1,6 +1,5 @@
 import tkinter as tk
 import SOSBoard
-import SOSComputer as computer
 
 def onButtonClick(btn, btnBoard, TurnText,gameBoard, x, y):
 
@@ -31,19 +30,6 @@ def onButtonClick(btn, btnBoard, TurnText,gameBoard, x, y):
                     CPUbtn = btnBoard[CPUx][CPUy]
                     onButtonClick(CPUbtn,btnBoard,TurnText,gameBoard,CPUx,CPUy)
 
-""" def computerMove(btnBoard,TurnText,gameBoard):
-    if checkComputer(gameBoard) and not gameBoard.checkEnd():
-        x,y = computer.ComputerPlayer.findMove(gameBoard)
-        computerbtn = btnBoard[x][y]
-        onButtonClick(computerbtn,btnBoard,TurnText,gameBoard,x,y)
-        computerMove(btnBoard,TurnText,gameBoard) 
-
-def checkComputer(gameBoard):
-    if gameBoard.getTurn().getType() == 'Computer':
-        return True
-    else:
-        return False
-"""
 def InitializeGameBoard(CenterFrame):
     gameBoard = SOSBoard.SOSSimpleBoard(8) #start with default board
     StartNewGame(gameBoard,CenterFrame,8,'Simple')
@@ -196,12 +182,6 @@ BluePlayerR2 = tk.Radiobutton(
     LeftFrame, text='O', value='O', variable=BlueLetter, justify="left")
 BluePlayerR2.bind('<Button-1>', lambda event,gameBoard=gameBoard: gameBoard.getBluePlayer().setLetter('O'))
 BluePlayerR2.grid(row=4, column=0, padx=(4, 2), pady=2)
-
-RecordGame = tk.BooleanVar()
-RecordCheckButton = tk.Checkbutton(
-    LeftFrame, text='Record Game', state='disabled', variable=RecordGame)
-RecordCheckButton.grid(row=6, column=0, padx=5, pady=(
-    (BoardSize.get()*10+5), 5), sticky="s")
 
 # right frame - red player label, human/computer radio buttons, S/O radio buttons
 RedType = tk.StringVar()

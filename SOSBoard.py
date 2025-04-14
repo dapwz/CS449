@@ -90,7 +90,7 @@ class SOSBoard:
                     continue
 
     def makeMove(self, moveX, moveY):
-        if self.boardArray[moveX][moveY] == ' ':
+        if self.boardArray[moveX][moveY] == ' ' and self.emptySpaces >=1:
             self.boardArray[moveX][moveY] = self.getTurn().getLetter()
             self.emptySpaces -= 1
             self.checkWin(moveX, moveY)
@@ -142,10 +142,10 @@ class SOSSimpleBoard(SOSBoard):
 
     def checkEnd(self):
         # simple win state = blue or red score over 0, or no more spaces
-        if (self.blueScore > 0 or self.redScore > 0 or self.emptySpaces ==0):
+        if (self.blueScore > 0 or self.redScore > 0 or self.emptySpaces == 0):
+            self.emptySpaces = 0
             return True
         return False
-
 
 class SOSGeneralBoard(SOSBoard):
     def __init__(self,boardSize):
@@ -164,7 +164,8 @@ class SOSSimpleBoardCPU(SOSBoardCPU):
 
     def checkEnd(self):
         # simple win state = blue or red score over 0, or no more spaces
-        if (self.blueScore > 0 or self.redScore > 0 or self.emptySpaces ==0):
+        if (self.blueScore > 0 or self.redScore > 0 or self.emptySpaces == 0):
+            self.emptySpaces = 0
             return True
         return False
 

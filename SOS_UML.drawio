@@ -1,0 +1,157 @@
+<mxfile host="Electron" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/26.2.2 Chrome/134.0.6998.178 Electron/35.1.2 Safari/537.36" version="26.2.2">
+  <diagram id="sosGameDiagram" name="Page-1">
+    <mxGraphModel dx="2068" dy="3049" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="hS7f5bUd3-7D78bmdBAM-5" value="" style="rounded=0;orthogonalLoop=1;jettySize=auto;entryX=0.006;entryY=-0.012;entryDx=0;entryDy=0;entryPerimeter=0;endArrow=diamond;endFill=1;verticalAlign=middle;labelPosition=left;verticalLabelPosition=middle;align=right;spacingLeft=0;textDirection=ltr;edgeStyle=orthogonalEdgeStyle;startArrow=open;startFill=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" parent="1" target="hS7f5bUd3-7D78bmdBAM-4" edge="1" source="hS7f5bUd3-7D78bmdBAM-6">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="180" y="-855" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;exitX=0;exitY=0.5;exitDx=0;exitDy=0;endFill=0;" parent="1" source="hS7f5bUd3-7D78bmdBAM-17" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="390" y="-590" as="sourcePoint" />
+            <mxPoint x="359.99999999999955" y="-690" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;exitX=1;exitY=0.5;exitDx=0;exitDy=0;endFill=0;" parent="1" source="hS7f5bUd3-7D78bmdBAM-9" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="240" y="-560" as="sourcePoint" />
+            <mxPoint x="359.99999999999955" y="-690" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;exitX=1;exitY=0.5;exitDx=0;exitDy=0;endFill=0;" parent="1" source="hS7f5bUd3-7D78bmdBAM-13" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="240" y="-460" as="sourcePoint" />
+            <mxPoint x="359.99999999999955" y="-690" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;exitX=0;exitY=0.5;exitDx=0;exitDy=0;endFill=0;" parent="1" source="hS7f5bUd3-7D78bmdBAM-25" target="hS7f5bUd3-7D78bmdBAM-16" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="520" y="-470" as="sourcePoint" />
+            <mxPoint x="500" y="-540" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0.496;entryY=0.997;entryDx=0;entryDy=0;entryPerimeter=0;endFill=0;" parent="1" source="hS7f5bUd3-7D78bmdBAM-21" target="hS7f5bUd3-7D78bmdBAM-19" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="520" y="-370" as="sourcePoint" />
+            <mxPoint x="490" y="-550" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="490" y="-370" />
+              <mxPoint x="470" y="-370" />
+              <mxPoint x="470" y="-520" />
+              <mxPoint x="469" y="-520" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="hS7f5bUd3-7D78bmdBAM-1" value="&lt;span style=&quot;font-weight: 400;&quot;&gt;SOSBoard&lt;/span&gt;" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="290" y="-1020" width="170" height="330" as="geometry">
+            <mxRectangle x="280" y="-1020" width="100" height="30" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="hS7f5bUd3-7D78bmdBAM-2" value="&lt;span style=&quot;text-align: center;&quot;&gt;– boardSize: Int&lt;/span&gt;&lt;br style=&quot;text-align: center;&quot;&gt;&lt;span style=&quot;text-align: center;&quot;&gt;– bluePlayer: SOSPlayer&lt;/span&gt;&lt;br style=&quot;text-align: center;&quot;&gt;&lt;span style=&quot;text-align: center;&quot;&gt;– redPlayer&lt;/span&gt;&lt;span style=&quot;text-align: center;&quot;&gt;: SOSPlayer&lt;/span&gt;&lt;br style=&quot;text-align: center;&quot;&gt;&lt;span style=&quot;text-align: center;&quot;&gt;– blueScore: Int&lt;/span&gt;&lt;br style=&quot;text-align: center;&quot;&gt;&lt;span style=&quot;text-align: center;&quot;&gt;– redScore: Int&lt;/span&gt;&lt;br style=&quot;text-align: center;&quot;&gt;&lt;span style=&quot;text-align: center;&quot;&gt;– emptySpaces: Int&lt;/span&gt;&lt;br style=&quot;text-align: center;&quot;&gt;&lt;span style=&quot;text-align: center;&quot;&gt;– boardArray: list(list(string))&lt;/span&gt;&lt;br style=&quot;text-align: center;&quot;&gt;&lt;span style=&quot;text-align: center;&quot;&gt;– turn&lt;/span&gt;&lt;span style=&quot;text-align: center;&quot;&gt;: SOSPlayer&lt;/span&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="hS7f5bUd3-7D78bmdBAM-1" vertex="1">
+          <mxGeometry y="26" width="170" height="124" as="geometry" />
+        </mxCell>
+        <mxCell id="hS7f5bUd3-7D78bmdBAM-3" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" parent="hS7f5bUd3-7D78bmdBAM-1" vertex="1">
+          <mxGeometry y="150" width="170" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="hS7f5bUd3-7D78bmdBAM-4" value="&lt;span style=&quot;text-align: center;&quot;&gt;+ resetBoard(size): Void&lt;br&gt;&lt;/span&gt;&lt;span style=&quot;text-align: center;&quot;&gt;+ getBlueScore(): Int&lt;/span&gt;&lt;br style=&quot;text-align: center;&quot;&gt;&lt;span style=&quot;text-align: center;&quot;&gt;+ getRedScore(): Int&lt;/span&gt;&lt;br style=&quot;text-align: center;&quot;&gt;&lt;span style=&quot;text-align: center;&quot;&gt;+ getBluePlayer(): SOSPlayer&lt;/span&gt;&lt;br style=&quot;text-align: center;&quot;&gt;&lt;span style=&quot;text-align: center;&quot;&gt;+ getRedPlayer(): SOSPlayer&lt;/span&gt;&lt;br style=&quot;text-align: center;&quot;&gt;&lt;span style=&quot;text-align: center;&quot;&gt;+ getTurn(): SOSPlayer&lt;/span&gt;&lt;br style=&quot;text-align: center;&quot;&gt;&lt;span style=&quot;text-align: center;&quot;&gt;+ getPlace(x,y): Bool&lt;/span&gt;&lt;br style=&quot;text-align: center;&quot;&gt;&lt;span style=&quot;text-align: center;&quot;&gt;+ getBoardSize(): Int&lt;/span&gt;&lt;br style=&quot;text-align: center;&quot;&gt;&lt;span style=&quot;text-align: center;&quot;&gt;+ changeTurn(): Void&lt;/span&gt;&lt;br style=&quot;text-align: center;&quot;&gt;&lt;span style=&quot;text-align: center;&quot;&gt;+ checkWin(x,y): Bool&lt;/span&gt;&lt;br style=&quot;text-align: center;&quot;&gt;&lt;span style=&quot;text-align: center;&quot;&gt;+ makeMove(x,y): Bool&lt;/span&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="hS7f5bUd3-7D78bmdBAM-1" vertex="1">
+          <mxGeometry y="158" width="170" height="172" as="geometry" />
+        </mxCell>
+        <mxCell id="hS7f5bUd3-7D78bmdBAM-6" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;SOSPlayer&lt;/span&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;&lt;span style=&quot;text-align: center;&quot;&gt;– PlayerColor: String&lt;/span&gt;&lt;br style=&quot;text-align: center;&quot;&gt;&lt;span style=&quot;text-align: center;&quot;&gt;– PlayerLetter: String&lt;/span&gt;&lt;br style=&quot;text-align: center;&quot;&gt;&lt;span style=&quot;text-align: center;&quot;&gt;– PlayerType: String&lt;/span&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;&lt;span style=&quot;text-align: center;&quot;&gt;+ getLetter()&lt;/span&gt;&lt;span style=&quot;text-align: center;&quot;&gt;: String&lt;/span&gt;&lt;br style=&quot;text-align: center;&quot;&gt;&lt;span style=&quot;text-align: center;&quot;&gt;+ getColor()&lt;/span&gt;&lt;span style=&quot;text-align: center;&quot;&gt;: String&lt;/span&gt;&lt;br style=&quot;text-align: center;&quot;&gt;&lt;span style=&quot;text-align: center;&quot;&gt;+ getType()&lt;/span&gt;&lt;span style=&quot;text-align: center;&quot;&gt;: String&lt;/span&gt;&lt;br style=&quot;text-align: center;&quot;&gt;&lt;span style=&quot;text-align: center;&quot;&gt;+ setLetter(letter)&lt;/span&gt;&lt;span style=&quot;text-align: center;&quot;&gt;: String&lt;/span&gt;&lt;br style=&quot;text-align: center;&quot;&gt;&lt;span style=&quot;text-align: center;&quot;&gt;+ setColor(color)&lt;/span&gt;&lt;span style=&quot;text-align: center;&quot;&gt;: String&lt;/span&gt;&lt;br style=&quot;text-align: center;&quot;&gt;&lt;span style=&quot;text-align: center;&quot;&gt;+ setType(type)&lt;/span&gt;&lt;span style=&quot;text-align: center; background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;: String&lt;/span&gt;&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="40" y="-945" width="160" height="180" as="geometry" />
+        </mxCell>
+        <mxCell id="hS7f5bUd3-7D78bmdBAM-8" value="&lt;span style=&quot;font-weight: 400;&quot;&gt;SOSSimpleBoard&lt;/span&gt;" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="40" y="-620" width="160" height="86" as="geometry" />
+        </mxCell>
+        <mxCell id="hS7f5bUd3-7D78bmdBAM-9" value="&lt;span style=&quot;text-align: center;&quot;&gt;(inherits SOSBoard)&lt;/span&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="hS7f5bUd3-7D78bmdBAM-8" vertex="1">
+          <mxGeometry y="26" width="160" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="hS7f5bUd3-7D78bmdBAM-10" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" parent="hS7f5bUd3-7D78bmdBAM-8" vertex="1">
+          <mxGeometry y="52" width="160" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="hS7f5bUd3-7D78bmdBAM-11" value="&lt;span style=&quot;text-align: center;&quot;&gt;+ checkEnd()&lt;/span&gt;&lt;span style=&quot;text-align: center;&quot;&gt;: Bool&lt;/span&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="hS7f5bUd3-7D78bmdBAM-8" vertex="1">
+          <mxGeometry y="60" width="160" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="hS7f5bUd3-7D78bmdBAM-12" value="&lt;span style=&quot;font-weight: 400;&quot;&gt;SOSGeneralBoard&lt;/span&gt;" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="40" y="-510" width="160" height="86" as="geometry" />
+        </mxCell>
+        <mxCell id="hS7f5bUd3-7D78bmdBAM-13" value="&lt;span style=&quot;text-align: center;&quot;&gt;(inherits SOSBoard)&lt;/span&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="hS7f5bUd3-7D78bmdBAM-12" vertex="1">
+          <mxGeometry y="26" width="160" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="hS7f5bUd3-7D78bmdBAM-14" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" parent="hS7f5bUd3-7D78bmdBAM-12" vertex="1">
+          <mxGeometry y="52" width="160" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="hS7f5bUd3-7D78bmdBAM-15" value="&lt;span style=&quot;text-align: center;&quot;&gt;+ checkEnd()&lt;/span&gt;&lt;span style=&quot;text-align: center;&quot;&gt;: Bool&lt;/span&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="hS7f5bUd3-7D78bmdBAM-12" vertex="1">
+          <mxGeometry y="60" width="160" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="hS7f5bUd3-7D78bmdBAM-16" value="&lt;span style=&quot;font-weight: 400;&quot;&gt;SOSBoardCPU&lt;/span&gt;" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="390" y="-660" width="160" height="86" as="geometry" />
+        </mxCell>
+        <mxCell id="hS7f5bUd3-7D78bmdBAM-17" value="&lt;span style=&quot;text-align: center;&quot;&gt;(inherits SOSBoard)&lt;/span&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="hS7f5bUd3-7D78bmdBAM-16" vertex="1">
+          <mxGeometry y="26" width="160" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="hS7f5bUd3-7D78bmdBAM-18" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" parent="hS7f5bUd3-7D78bmdBAM-16" vertex="1">
+          <mxGeometry y="52" width="160" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="hS7f5bUd3-7D78bmdBAM-19" value="&lt;span style=&quot;text-align: center;&quot;&gt;+ findMove(): (Int, Int)&lt;/span&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="hS7f5bUd3-7D78bmdBAM-16" vertex="1">
+          <mxGeometry y="60" width="160" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="hS7f5bUd3-7D78bmdBAM-20" value="&lt;span style=&quot;font-weight: 400;&quot;&gt;SOSGeneralBoardCPU&lt;/span&gt;" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="490" y="-410" width="160" height="86" as="geometry" />
+        </mxCell>
+        <mxCell id="hS7f5bUd3-7D78bmdBAM-21" value="&lt;span style=&quot;text-align: center;&quot;&gt;(inherits SOSBoardCPU)&lt;/span&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="hS7f5bUd3-7D78bmdBAM-20" vertex="1">
+          <mxGeometry y="26" width="160" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="hS7f5bUd3-7D78bmdBAM-22" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" parent="hS7f5bUd3-7D78bmdBAM-20" vertex="1">
+          <mxGeometry y="52" width="160" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="hS7f5bUd3-7D78bmdBAM-23" value="&lt;span style=&quot;text-align: center;&quot;&gt;+ checkEnd()&lt;/span&gt;&lt;span style=&quot;text-align: center;&quot;&gt;: Bool&lt;/span&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="hS7f5bUd3-7D78bmdBAM-20" vertex="1">
+          <mxGeometry y="60" width="160" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="hS7f5bUd3-7D78bmdBAM-24" value="&lt;span style=&quot;font-weight: 400;&quot;&gt;SOSSimpleBoardCPU&lt;/span&gt;" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="490" y="-510" width="160" height="86" as="geometry" />
+        </mxCell>
+        <mxCell id="hS7f5bUd3-7D78bmdBAM-25" value="&lt;span style=&quot;text-align: center;&quot;&gt;(inherits SOSBoardCPU)&lt;/span&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="hS7f5bUd3-7D78bmdBAM-24" vertex="1">
+          <mxGeometry y="26" width="160" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="hS7f5bUd3-7D78bmdBAM-26" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" parent="hS7f5bUd3-7D78bmdBAM-24" vertex="1">
+          <mxGeometry y="52" width="160" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="hS7f5bUd3-7D78bmdBAM-27" value="&lt;span style=&quot;text-align: center;&quot;&gt;+ checkEnd()&lt;/span&gt;&lt;span style=&quot;text-align: center;&quot;&gt;: Bool&lt;/span&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="hS7f5bUd3-7D78bmdBAM-24" vertex="1">
+          <mxGeometry y="60" width="160" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="hS7f5bUd3-7D78bmdBAM-28" value="&lt;span style=&quot;font-weight: 400;&quot;&gt;SOSGame&lt;/span&gt;" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="40" y="-1520" width="410" height="450" as="geometry">
+            <mxRectangle x="280" y="-1020" width="100" height="30" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="hS7f5bUd3-7D78bmdBAM-29" value="&lt;span style=&quot;text-align: center;&quot;&gt;– window: TK&lt;/span&gt;&lt;br style=&quot;text-align: center;&quot;&gt;&lt;span style=&quot;text-align: center;&quot;&gt;– TopFrame: Frame&lt;/span&gt;&lt;br style=&quot;text-align: center;&quot;&gt;&lt;span style=&quot;text-align: center;&quot;&gt;– LeftFrame: Frame&lt;/span&gt;&lt;br style=&quot;text-align: center;&quot;&gt;&lt;span style=&quot;text-align: center;&quot;&gt;– CenterFrame: Frame&lt;/span&gt;&lt;br style=&quot;text-align: center;&quot;&gt;&lt;span style=&quot;text-align: center;&quot;&gt;– RightFrame: Frame&lt;/span&gt;&lt;br style=&quot;text-align: center;&quot;&gt;&lt;span style=&quot;text-align: center;&quot;&gt;–&amp;nbsp;&lt;/span&gt;SOSText: Label&lt;div&gt;&lt;span style=&quot;text-align: center;&quot;&gt;–&amp;nbsp;&lt;/span&gt;GameType: StringVar&lt;br style=&quot;text-align: center;&quot;&gt;&lt;span style=&quot;text-align: center;&quot;&gt;–&amp;nbsp;&lt;/span&gt;GameR1:&amp;nbsp;Radiobutton&lt;div&gt;&lt;span style=&quot;text-align: center;&quot;&gt;–&amp;nbsp;&lt;/span&gt;GameR2&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;:&amp;nbsp;Radiobutton&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;text-align: center;&quot;&gt;–&amp;nbsp;&lt;/span&gt;BoardText&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;: Label&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;text-align: center;&quot;&gt;–&amp;nbsp;&lt;/span&gt;BoardSize: IntVar&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;text-align: center;&quot;&gt;–&amp;nbsp;&lt;/span&gt;gameBoard:&amp;nbsp;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;SOSGameBoard&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;text-align: center;&quot;&gt;–&amp;nbsp;&lt;/span&gt;BoardSizeBox: Entry&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;text-align: center;&quot;&gt;–&amp;nbsp;&lt;/span&gt;BlueLetter&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;: StringVar&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;text-align: center;&quot;&gt;–&amp;nbsp;&lt;/span&gt;BlueType&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;: StringVar&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;text-align: center;&quot;&gt;–&amp;nbsp;&lt;/span&gt;BlueTypeR1&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;:&amp;nbsp;Radiobutton&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;text-align: center;&quot;&gt;–&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;BlueTypeR2&lt;/span&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;:&amp;nbsp;Radiobutton&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;div&gt;&lt;span style=&quot;text-align: center;&quot;&gt;– Red&lt;/span&gt;Letter&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;: StringVar&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;text-align: center;&quot;&gt;– Red&lt;/span&gt;Type&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;: StringVar&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;text-align: center;&quot;&gt;– Red&lt;/span&gt;TypeR1&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;:&amp;nbsp;Radiobutton&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;text-align: center;&quot;&gt;– Red&lt;/span&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;TypeR2&lt;/span&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;:&amp;nbsp;Radiobutton&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;text-align: center; background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;–&lt;/span&gt;&lt;span style=&quot;text-align: center; background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;&amp;nbsp;&lt;/span&gt;NewGame: Button&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="hS7f5bUd3-7D78bmdBAM-28" vertex="1">
+          <mxGeometry y="26" width="410" height="324" as="geometry" />
+        </mxCell>
+        <mxCell id="hS7f5bUd3-7D78bmdBAM-30" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" parent="hS7f5bUd3-7D78bmdBAM-28" vertex="1">
+          <mxGeometry y="350" width="410" height="10" as="geometry" />
+        </mxCell>
+        <mxCell id="hS7f5bUd3-7D78bmdBAM-31" value="&lt;span style=&quot;text-align: center;&quot;&gt;+&amp;nbsp;&lt;/span&gt;onButtonClick(btn, btnBoard, TurnText,gameBoard, x, y): Void&lt;br style=&quot;text-align: center;&quot;&gt;&lt;span style=&quot;text-align: center;&quot;&gt;+&amp;nbsp;&lt;/span&gt;InitializeGameBoard(CenterFrame): SOSSimpleBoard&lt;br style=&quot;text-align: center;&quot;&gt;&lt;span style=&quot;text-align: center;&quot;&gt;+&amp;nbsp;&lt;/span&gt;StartNewGame(gameBoard, CenterFrame, size, type): SOSGameBoard&lt;br style=&quot;text-align: center;&quot;&gt;&lt;span style=&quot;text-align: center;&quot;&gt;+&amp;nbsp;&lt;/span&gt;callback(input): Bool&lt;br style=&quot;text-align: center;&quot;&gt;&lt;span style=&quot;text-align: center;&quot;&gt;+&amp;nbsp;&lt;/span&gt;SizeCheck(size): Int" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="hS7f5bUd3-7D78bmdBAM-28" vertex="1">
+          <mxGeometry y="360" width="410" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="hS7f5bUd3-7D78bmdBAM-32" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;endArrow=open;endFill=0;startArrow=diamond;startFill=1;" parent="1" source="hS7f5bUd3-7D78bmdBAM-31" target="hS7f5bUd3-7D78bmdBAM-1" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="7KbQ0TmtYOVW7HYxAtle-3" value="1" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="260" y="-890" width="20" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="7KbQ0TmtYOVW7HYxAtle-4" value="1" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="380" y="-1050" width="20" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="7KbQ0TmtYOVW7HYxAtle-5" value="2" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="210" y="-880" width="20" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="7KbQ0TmtYOVW7HYxAtle-6" value="1" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="220" y="-1060" width="20" height="20" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

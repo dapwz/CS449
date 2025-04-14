@@ -1,0 +1,57 @@
+<mxfile host="Electron" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/26.2.2 Chrome/134.0.6998.178 Electron/35.1.2 Safari/537.36" version="26.2.2">
+  <diagram id="sosGameDiagram" name="Page-1">
+    <mxGraphModel dx="910" dy="1494" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1200" pageHeight="800" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="SOSPlayer" value="SOSPlayer&#xa;–––––––––––––––––––––––––&#xa;– PlayerColor&#xa;– PlayerLetter&#xa;– PlayerType&#xa;–––––––––––––––––––––––––&#xa;+ getLetter()&#xa;+ getColor()&#xa;+ getType()&#xa;+ setLetter(letter)&#xa;+ setColor(color)&#xa;+ setType(type)" style="shape=umlClass;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="10" y="-55" width="160" height="180" as="geometry" />
+        </mxCell>
+        <mxCell id="SOSBoard" value="SOSBoard&#xa;–––––––––––––––––––––––––&#xa;– boardSize&#xa;– bluePlayer&#xa;– redPlayer&#xa;– blueScore&#xa;– redScore&#xa;– emptySpaces&#xa;– boardArray&#xa;– turn&#xa;–––––––––––––––––––––––––&#xa;+ resetBoard(size)&#xa;+ getBlueScore()&#xa;+ getRedScore()&#xa;+ getBluePlayer()&#xa;+ getRedPlayer()&#xa;+ getTurn()&#xa;+ getPlace(x,y)&#xa;+ getBoardSize()&#xa;+ changeTurn()&#xa;+ checkWin(x,y)&#xa;+ makeMove(x,y)" style="shape=umlClass;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="220" y="-130" width="260" height="330" as="geometry" />
+        </mxCell>
+        <mxCell id="SOSBoardCPU" value="SOSBoardCPU (abstract)&#xa;–––––––––––––––––––––––––&#xa;(inherits SOSBoard)&#xa;–––––––––––––––––––––––––&#xa;+ findMove()" style="shape=umlClass;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="530" y="-15" width="220" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="SOSSimpleBoard" value="SOSSimpleBoard&#xa;–––––––––––––––––––––––––&#xa;(inherits SOSBoard)&#xa;–––––––––––––––––––––––––&#xa;+ checkEnd()" style="shape=umlClass;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="10" y="320" width="220" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="SOSGeneralBoard" value="SOSGeneralBoard&#xa;–––––––––––––––––––––––––&#xa;(inherits SOSBoard)&#xa;–––––––––––––––––––––––––&#xa;+ checkEnd()" style="shape=umlClass;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="240" y="320" width="220" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="SOSSimpleBoardCPU" value="SOSSimpleBoardCPU&#xa;–––––––––––––––––––––––––&#xa;(inherits SOSBoardCPU)&#xa;–––––––––––––––––––––––––&#xa;+ checkEnd()" style="shape=umlClass;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="480" y="320" width="220" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="SOSGeneralBoardCPU" value="SOSGeneralBoardCPU&#xa;–––––––––––––––––––––––––&#xa;(inherits SOSBoardCPU)&#xa;–––––––––––––––––––––––––&#xa;+ checkEnd()" style="shape=umlClass;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="720" y="320" width="220" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="edge1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;" parent="1" source="SOSBoardCPU" target="SOSBoard" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;" parent="1" source="SOSSimpleBoard" target="SOSBoard" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;" parent="1" source="SOSGeneralBoard" target="SOSBoard" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;" parent="1" source="SOSSimpleBoardCPU" target="SOSBoardCPU" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;" parent="1" source="SOSGeneralBoardCPU" target="SOSBoardCPU" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge6" style="edgeStyle=elbowEdgeStyle;endArrow=diamond;html=1;dashed=0;" parent="1" source="SOSBoard" target="SOSPlayer" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="mult1" value="1" style="text;html=1;" parent="1" vertex="1">
+          <mxGeometry x="210" y="70" width="30" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="mult2" value="1" style="text;html=1;" parent="1" vertex="1">
+          <mxGeometry x="210" y="90" width="30" height="20" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
